@@ -1,0 +1,29 @@
+name: Run build and tests
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
+    environment: CIRelease
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+            distribution: 'temurin'
+            java-version: '17' # or your project's java version
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build --stacktrace # Add --stacktrace for better error messages
