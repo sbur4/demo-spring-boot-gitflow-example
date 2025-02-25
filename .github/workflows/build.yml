@@ -24,6 +24,6 @@ jobs:
             distribution: 'temurin'
             java-version: '17' # or your project's java version
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew build --stacktrace # Add --stacktrace for better error messages
